@@ -46,3 +46,10 @@ test("Decrement Functionality", () => {
   fireEvent.click(DecrementButton);
   expect(element.textContent).toBe("2");
 });
+
+test("input filed with change value", async () => {
+  render(<Counter />);
+  let element = screen.getByRole("textbox");
+  fireEvent.change(element, { target: { value: "Amar" } });
+  expect(element).toHaveValue("Amar");
+});

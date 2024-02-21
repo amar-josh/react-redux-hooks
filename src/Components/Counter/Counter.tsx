@@ -1,4 +1,5 @@
-import React, { useReducer } from "react";
+import React, { useCallback, useReducer } from "react";
+import CounterOperations from "./CounterOperations";
 interface CounterState {
   counter: number;
 }
@@ -25,17 +26,26 @@ const reducer = (state: CounterState, action: Action) => {
 function Counter() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const dispatchAction = useCallback(
+    (res: { type: "increment" | "decrement"; payload?: number }) => {
+      dispatch(res);
+    },
+    []
+  );
+
   return (
     <div>
       <h4>Counter Page</h4>
-      <button
-        onClick={() => dispatch({ type: "increment", payload: 1 })}
-        id="Increment"
-      >
-        Increment
-      </button>
-      <button onClick={() => dispatch({ type: "decrement" })}>Decrement</button>
+      <CounterOperations dispatch={dispatchAction} />
       <p data-testid="counter-value">{state.counter}</p>
+      <div>
+        <input
+          type="text"
+          placeholder="user-name"
+          defaultValue={"Ajay"}
+          onChange={(e) => console.log(e)}
+        />
+      </div>
     </div>
   );
 }

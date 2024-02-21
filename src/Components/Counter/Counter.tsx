@@ -27,13 +27,15 @@ function Counter() {
 
   return (
     <div>
-      <p>Counter</p>
-      <button onClick={() => dispatch({ type: "increment", payload: 1 })}>
-        increment
+      <h4>Counter Page</h4>
+      <button
+        onClick={() => dispatch({ type: "increment", payload: 1 })}
+        id="Increment"
+      >
+        Increment
       </button>
-      <span></span>
-      <button onClick={() => dispatch({ type: "decrement" })}>decrement</button>
-      <p> {state.counter}</p>
+      <button onClick={() => dispatch({ type: "decrement" })}>Decrement</button>
+      <p data-testid="counter-value">{state.counter}</p>
     </div>
   );
 }
